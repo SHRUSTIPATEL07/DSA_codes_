@@ -1,0 +1,83 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+class Queue {
+private:
+    Node* front;
+    Node* rear;
+public:
+    Queue() {
+        front = NULL;
+        rear = NULL;
+    }
+    void enqueue(int x) {
+        Node* temp = new Node();
+        temp->data = x;
+        temp->next = NULL;
+        if (front == NULL && rear == NULL) {
+            front = rear = temp;
+            return;
+        }
+        rear->next = temp;
+        rear = temp;
+    }
+    void dequeue() {
+        Node* temp = front;
+        if (front == NULL) {
+            cout << "Underflow" << endl;
+            return;
+        }
+        if (front == rear) {
+            front = rear = NULL;
+        }
+        else {
+            front = front->next;
+        }
+        delete(temp);
+    }
+    void display() {
+        Node* temp = front;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Queue q;
+    int choice, x;
+    do {
+        cin >> choice;
+        switch (choice) {
+        case 1:
+            cin >> x;
+            q.enqueue(x);
+            break;
+        case 2:
+            q.dequeue();
+            break;
+        case 3:
+            q.display();
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Invalid choice, please try again." << endl;
+            break;
+        }
+    } while (choice != 0);
+
+    return 0;
+}
