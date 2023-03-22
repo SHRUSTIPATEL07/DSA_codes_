@@ -1,0 +1,72 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int  n;
+int q[100];
+int f= - 1;
+int r= - 1;
+int y;
+void Insert(int y) {
+
+   if (r== n - 1)
+   {
+   cout<<"overflow"<<endl;
+   }
+   else {
+      if (f== -1)
+           f= 0;
+     
+      r++;
+      q[r] = y;
+   }
+}
+void Delete() {
+   if (f== - 1 ) {
+      cout<<"underflow";
+   }
+       else if(f==r)
+       {
+          // int y=q[f];
+           f=-1;
+           r=-1;
+       }
+    else {
+     // y=q[f];
+      f++;
+   }
+}
+void Display() {
+   if (f == - 1)
+   cout<<"underflow"<<endl;
+   else {
+     
+      for (int i = f; i <= r; i++)
+      cout<<q[i]<<" ";
+         cout<<endl;
+   }
+}
+int main() {
+    //int s;
+    cin>>n;
+   int ch,y;
+   
+   do {
+     
+      cin>>ch;
+      switch (ch) {
+         case 1: 
+              cin>>y;
+              Insert(y);
+         break;
+         case 2: Delete();
+         break;
+         case 3: Display();
+         break;
+        
+      }
+   } while(ch!=0);
+   return 0;
+}
